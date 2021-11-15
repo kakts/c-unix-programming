@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         int data = strtol(argv[i], &check, 10);
         if (*check != '\0') {
             perror("strtoi: failed to convert");
-            exit(0);
+            exit(EXIT_SUCCESS);
         }
         sum += data;
 
