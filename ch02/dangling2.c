@@ -20,6 +20,7 @@ int wrong_main(void)
     int *q = &p->x;
     p->x = 10; p->y = 20;
     printf("%d\n", *q);
+    // printfで使用したあとにfreeする
     free(p);
 }
 
