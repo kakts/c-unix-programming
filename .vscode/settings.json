@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "stdlib.h": "c",
-        "errno.h": "c",
-        "__config": "c",
-        "cstring": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
-}

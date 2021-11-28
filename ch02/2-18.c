@@ -8,6 +8,7 @@
  * - 出力のためにはputcharだけを使う
  */
 #include <stdio.h>
+#include <stdlib.h> // exit
 #include <string.h>
 #include <stdarg.h>
 
@@ -34,7 +35,29 @@ int get_int_var_count(char format[])
     return sum_of_arg;
 }
 
-void tiny_printf(char format[], ...)
+int get_number_of_digits(int x) {
+    int res = 1;
+    // printf("x: %d\n", x);
+
+    int target = x;
+    while (1) {
+        target = target / 10;
+        // printf("a: %d\n", target);
+        if (target == 0) {
+            break;
+        }
+        res++;
+    }
+    return res;
+}
+
+/**
+ * 自作 tiny_printf improve版
+ * 桁数とか諸々自前で計算した
+ * 
+ * 問題文だと、数字は1桁前提になっているが、2桁以上の整数でも表示できるようになっている。
+ */
+void improve_tiny_printf(char format[], ...)
 {
     // formatから%dの個数のチェックをする
     int sum_of_arg = get_int_var_count(format);
@@ -44,29 +67,38 @@ void tiny_printf(char format[], ...)
     
     
     va_list pvar;
-    va_start(pvar, sum_of_arg);
+    va_start(pvar, format);
 
-    char res[strlen(format) - (2 * sum_of_arg)];
-    int res_add_num = 0;
     while (i <= format_len) {
-        if (format[i] == '%') {
+        // printf("----\n");
+        if (format[i] == '%' && format[i + 1] == 'd') {
             int tmp = va_arg(pvar, int);
-            printf("tmp:%d", tmp);
-            res[res_add_num] = tmp;
+            // printf("------tmp: %d", tmp);
+            // 入力値の整数の桁数を入力
+            int number_of_digits = get_number_of_digits(tmp);
+            // printf("--number of digits:%d\n", number_of_digits);
+            char converted[number_of_digits + 1];
+            sprintf(converted, "%d", tmp);
+            // 整数値の桁数分ループして文字出力
+            for (int j = 0; j < number_of_digits; j++) {
+                int res = putchar(converted[j]);
+                if (res == EOF) {
+                    exit(1);
+                }
+            }
+
             i+=2;
-            res_add_num++;
             continue;
         }
-        res[res_add_num] = format[i];
+        putchar(format[i]);
         i++;
-        res_add_num++;
     }
     va_end(pvar);
 
-    
+
 }
 
 int main(void)
 {
-    tiny_printf("%d, %d, %d aaa %d", 1, 2, 3, 4);
+    tiny_printf("test:%d, %d, %d aaa %d", 1100, 23001, 3, 4);
 }
