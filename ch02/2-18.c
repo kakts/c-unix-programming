@@ -98,7 +98,34 @@ void improve_tiny_printf(char format[], ...)
 
 }
 
+int tiny_printf(const char *fmt, ...)
+{
+    va_list pvar;
+    va_start(pvar, fmt);
+    // 終端までループ
+    while (*fmt != '\0') {
+        if (*fmt != '%') {
+            // %d以外はそのまま出力
+            putchar(*fmt);
+        } else if (*++fmt == 'd') {
+            // 1桁の整数を文字に変換して出力
+            putchar('0' + va_arg(pvar, int));
+        } else {
+            return -1;
+        }
+        fmt++;
+    }
+    va_end(pvar);
+    return 0;
+}
+
 int main(void)
 {
-    tiny_printf("test:%d, %d, %d aaa %d", 1100, 23001, 3, 4);
+    // original 1桁のみ対応版
+    tiny_printf("hello: \n");
+    tiny_printf("hello: %d\n", 1);
+    tiny_printf("hello: %d %d\n", 1, 2);
+
+    // 複数桁対応版
+    improve_tiny_printf("test:%d, %d, %d aaa %d", 1100, 23001, 3, 4);
 }
