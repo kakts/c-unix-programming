@@ -22,6 +22,7 @@ int main(void) {
     }
 
     // output.file open
+    // ファイルがない場合は作る必要があるのでO_CREATを指定
     int output_fd = open("ch03/output.file", O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (output_fd == -1) {
         perror("open output.file");
