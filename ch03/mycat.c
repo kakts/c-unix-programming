@@ -41,7 +41,7 @@ void read_and_concat_from_file(int argc, char const *argv[]) {
     // 開くファイルのfd一覧
     int fd_list[argc - 1];
 
-    char buf[MAX_BYTE_STR];
+    char buf[MAX_BYTE_STR * argc];
 
     char read_buf_list[argc - 1][MAX_BYTE_STR];
     int READ_BYTE = 64;
@@ -61,12 +61,14 @@ void read_and_concat_from_file(int argc, char const *argv[]) {
         }
         fd_list[i] = fd;
     }
-    printf("read_cc:%d", read_cc);
 
+    // WIP ファイルを連結して表示させる
+    for (int i = 0; i < argc - 1; i++) {
+        strcat(buf, read_buf_list[i]);
+    }
 
-
-
-
+    // 連結したものを表示させる
+    printf("finish\n%s:\n", buf);
 }
 
 int main(int argc, char const *argv[])
