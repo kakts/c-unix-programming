@@ -58,6 +58,8 @@ void writediary(void) {
     }
     // EOFか?
     if (feof(stdin)) {
+        // ストリームエラー発生時に、そのストリームにエラーのフラグがついた状態になる
+        // これを消すためにclearerrを使う。
         clearerr(stdin);
     } else {
         perror("fgets");
