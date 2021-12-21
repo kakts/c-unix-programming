@@ -56,4 +56,4 @@ dkms.conf
 *.dat
 
 # ch04 diary
-./ch04/diary
+ch04/diary
