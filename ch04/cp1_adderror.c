@@ -45,6 +45,8 @@ int main(int argc, char const *argv[])
 
     if (ferror(input_fp)) {
         perror("getc");
+        // getcでエラーが起きても、開いているファイルは閉じた方がいいので、exitせずにそれに続く
+        // fcloseが実行されるようにしてある
     }
 
 
