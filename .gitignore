@@ -57,3 +57,4 @@ dkms.conf
 
 # ch04 diary
 ch04/diary
+ch04/*.db
