@@ -12,6 +12,7 @@
 #include <time.h>
 
 #define ACCTBOOK "ch04/acctbook.txt"
+
 enum {
     MAXLINELEN = 80,
     BUFLEN = MAXLINELEN + 1,
