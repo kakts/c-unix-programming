@@ -1,6 +1,7 @@
 /**
  * @file writeout.c
  * 
+ * q3-4
  * stdinから読んだデータをファイルoutput.fileに書く
  */
 #include <stdio.h>
@@ -11,11 +12,12 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
+
 int main(void)
 {
     int ofd;
     ssize_t cc;
-    char buf[1024];
+    char buf[10240];
 
     if ((ofd = open("ch03/output_write.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1) 
     {
