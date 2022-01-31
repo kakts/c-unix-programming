@@ -23,8 +23,12 @@ int main(void)
     // fork前
     pid = getpid();
     printf("before: fork: pid\%d, i = %d\n", pid, i);
+
+    // 出力データがstdioのバッファに溜まったままフォークするのをさけるため、ここでフラッシュしておく
+    // これをしないと、forkされた子プロセスでもバッファデータを持つことになってしまう。
     fflush(stdout);
 
+    // fork()の処理から、子プロセスが作られる。子プロセスはこのfork()から戻るところから始まる
     // fork
     fork_pid = fork();
 
