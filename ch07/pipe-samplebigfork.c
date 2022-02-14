@@ -19,7 +19,7 @@ enum {
 int main(void)
 {
     int fd, pipe_fd[2], nbytes;
-    char buf [SIZE], buf2[SIZE];
+    char buf [SIZE], buf2[SIZE] = "Hello\n";
 
     // パイプの作成
     if (pipe(pipe_fd) == -1) {
